@@ -59,7 +59,7 @@ class Varien_Autoload
 
 		$realPath = self::getFullPath($classFile);
 		if ($realPath !== false) {
-			return include $realPath;
+			return include BP . DS . $realPath;
 		}
         return false;
     }
@@ -118,6 +118,8 @@ class Varien_Autoload
 	static public function getFullPath($filename) {
 		if (!isset(self::$_cache[$filename])) {
 			self::$_cache[$filename] = self::searchFullPath($filename);
+			// removing the basepath
+			self::$_cache[$filename] = str_replace(BP . DS, '', self::$_cache[$filename]);
 			self::$_numberOfFilesAddedToCache++;
 		}
 		return self::$_cache[$filename];
