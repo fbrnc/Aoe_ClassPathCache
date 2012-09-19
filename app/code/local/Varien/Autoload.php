@@ -54,15 +54,16 @@ class Varien_Autoload
      */
     public function autoload($class)
     {
-        $classFile = str_replace(' ', DIRECTORY_SEPARATOR, ucwords(str_replace('_', ' ', $class)));
-        $classFile.= '.php';
-
-		$realPath = self::getFullPath($classFile);
+		$realPath = self::getFullPath($class);
 		if ($realPath !== false) {
 			return include BP . DS . $realPath;
 		}
         return false;
     }
+
+	static function getFileFromClassname($classname) {
+		return str_replace(' ', DIRECTORY_SEPARATOR, ucwords(str_replace('_', ' ', $classname))) . '.php';
+	}
 
     /**
      * Register autoload scope
@@ -112,17 +113,17 @@ class Varien_Autoload
 	/**
 	 * Get full path
 	 *
-	 * @param $filename
+	 * @param $classname
 	 * @return mixed
 	 */
-	static public function getFullPath($filename) {
-		if (!isset(self::$_cache[$filename])) {
-			self::$_cache[$filename] = self::searchFullPath($filename);
+	static public function getFullPath($classname) {
+		if (!isset(self::$_cache[$classname])) {
+			self::$_cache[$classname] = self::searchFullPath(self::getFileFromClassname($classname));
 			// removing the basepath
-			self::$_cache[$filename] = str_replace(BP . DS, '', self::$_cache[$filename]);
+			self::$_cache[$classname] = str_replace(BP . DS, '', self::$_cache[$classname]);
 			self::$_numberOfFilesAddedToCache++;
 		}
-		return self::$_cache[$filename];
+		return self::$_cache[$classname];
 	}
 
 	/**
