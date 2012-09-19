@@ -167,8 +167,14 @@ class Varien_Autoload
 				$fileContent .= ",\n";
 			}
 			$fileContent .= "));";
-			file_put_contents(self::getCacheFilePath(), $fileContent);
-			@chmod(self::getCacheFilePath(), 0664);
+
+			$tmpfile = tempnam(sys_get_temp_dir(), 'aoe_classpathcache');
+			if (file_put_contents($tmpfile, $fileContent)) {
+				if (rename($tmpfile, self::getCacheFilePath())) {
+					@chmod(self::getCacheFilePath(), 0664);
+				}
+			}
+
 		}
 	}
 
