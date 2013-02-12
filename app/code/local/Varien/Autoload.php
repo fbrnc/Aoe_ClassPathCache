@@ -15,7 +15,7 @@ class Varien_Autoload
     static protected $_cache = array();
     static protected $_numberOfFilesAddedToCache = 0;
 
-    protected $_arrLoadedClasses    = array();
+    protected $_arrLoadedClasses = array();
     static protected $useAPC = FALSE;
 
     /**
@@ -23,6 +23,9 @@ class Varien_Autoload
      */
     public function __construct()
     {
+        if (!defined('BP')) {
+            define('BP', dirname(dirname(dirname(dirname(dirname(__FILE__))))));
+        }
         if (extension_loaded('apc')) {
             self::$useAPC = TRUE;
         }
@@ -61,7 +64,7 @@ class Varien_Autoload
     {
         $realPath = self::getFullPath($class);
         if ($realPath !== false) {
-            return include BP . DS . $realPath;
+            return include BP . DIRECTORY_SEPARATOR . $realPath;
         }
         return false;
     }
@@ -98,7 +101,7 @@ class Varien_Autoload
      * @return string
      */
     static public function getCacheFilePath() {
-        return BP . DS . 'var' . DS . 'cache'. DS . 'classPathCache.php';
+        return BP . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'cache'. DIRECTORY_SEPARATOR . 'classPathCache.php';
     }
 
     /**
@@ -138,7 +141,7 @@ class Varien_Autoload
         if (!isset(self::$_cache[$className])) {
             self::$_cache[$className] = self::searchFullPath(self::getFileFromClassName($className));
             // removing the basepath
-            self::$_cache[$className] = str_replace(BP . DS, '', self::$_cache[$className]);
+            self::$_cache[$className] = str_replace(BP . DIRECTORY_SEPARATOR, '', self::$_cache[$className]);
             self::$_numberOfFilesAddedToCache++;
         }
         return self::$_cache[$className];
