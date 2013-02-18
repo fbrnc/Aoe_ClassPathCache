@@ -8,7 +8,7 @@
 class Varien_Autoload
 {
     const SCOPE_FILE_PREFIX = '__';
-    const CACHE_KEY = 'classPathCache';
+    const CACHE_KEY_PREFIX = 'classPathCache';
 
     static protected $_instance;
     static protected $_scope = 'default';
@@ -17,6 +17,7 @@ class Varien_Autoload
 
     protected $_arrLoadedClasses = array();
     static protected $useAPC = FALSE;
+    static protected $cacheKey = self::CACHE_KEY_PREFIX;
 
     /**
      * Class constructor
@@ -29,6 +30,7 @@ class Varien_Autoload
         if (extension_loaded('apc')) {
             self::$useAPC = TRUE;
         }
+        self::$cacheKey = self::CACHE_KEY_PREFIX . "_" . md5(BP);
         self::registerScope(self::$_scope);
         self::loadCacheContent();
     }
@@ -120,7 +122,7 @@ class Varien_Autoload
      */
     static public function loadCacheContent() {
         if (self::$useAPC) {
-            $value = apc_fetch(self::CACHE_KEY);
+            $value = apc_fetch(self::$cacheKey);
             if ($value !== FALSE) {
                 self::setCache($value);
             }
@@ -172,7 +174,7 @@ class Varien_Autoload
     {
         if (self::$_numberOfFilesAddedToCache > 0) {
             if (self::$useAPC) {
-                apc_store(self::CACHE_KEY, self::$_cache, 0);
+                apc_store(self::$cacheKey, self::$_cache, 0);
             } else {
                 $fileContent = serialize(self::$_cache);
                 $tmpFile = tempnam(sys_get_temp_dir(), 'aoe_classpathcache');
