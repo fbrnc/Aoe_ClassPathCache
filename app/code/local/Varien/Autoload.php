@@ -27,7 +27,7 @@ class Varien_Autoload
      */
     public function __construct()
     {
-        if (defined(BP)) {
+        if (defined('BP')) {
             self::$_BP = BP;
         }
         elseif (strpos($_SERVER["SCRIPT_FILENAME"], 'get.php') !== false) {
@@ -40,7 +40,7 @@ class Varien_Autoload
         if (extension_loaded('apc')) {
             self::$useAPC = TRUE;
         }
-        self::$cacheKey = self::CACHE_KEY_PREFIX . "_" . md5(self:$_BP);
+        self::$cacheKey = self::CACHE_KEY_PREFIX . "_" . md5(self::$_BP);
         self::registerScope(self::$_scope);
         self::loadCacheContent();
     }
