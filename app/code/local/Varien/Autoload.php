@@ -69,6 +69,12 @@ class Varien_Autoload
         return false;
     }
 
+    /**
+     * Get file name from class name
+     *
+     * @param string $className
+     * @return string
+     */
     static function getFileFromClassName($className) {
         return str_replace(' ', DIRECTORY_SEPARATOR, ucwords(str_replace('_', ' ', $className))) . '.php';
     }
