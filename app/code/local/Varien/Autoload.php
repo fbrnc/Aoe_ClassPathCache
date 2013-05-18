@@ -14,7 +14,6 @@ class Varien_Autoload
     static protected $_cache = array();
     static protected $_numberOfFilesAddedToCache = 0;
 
-    protected $_arrLoadedClasses = array();
     static protected $useAPC = FALSE;
     static protected $cacheKey = self::CACHE_KEY_PREFIX;
 
