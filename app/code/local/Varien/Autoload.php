@@ -136,7 +136,7 @@ class Varien_Autoload
      */
     static public function loadCacheContent() {
         if (self::isApcUsed()) {
-            $value = apc_fetch(self::$cacheKey);
+            $value = apc_fetch(self::getCacheKey());
             if ($value !== FALSE) {
                 self::setCache($value);
             }
@@ -192,13 +192,23 @@ class Varien_Autoload
     }
 
     /**
+     * Get cache key (for apc)
+     *
+     * @return string
+     */
+    public function getCacheKey()
+    {
+        return self::$cacheKey;
+    }
+
+    /**
      * Class destructor
      */
     public function __destruct()
     {
         if (self::$_numberOfFilesAddedToCache > 0) {
             if (self::isApcUsed()) {
-                apc_store(self::$cacheKey, self::$_cache, 0);
+                apc_store(self::getCacheKey(), self::$_cache, 0);
             } else {
                 $fileContent = serialize(self::$_cache);
                 $tmpFile = tempnam(sys_get_temp_dir(), 'aoe_classpathcache');
