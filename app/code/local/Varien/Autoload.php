@@ -186,7 +186,7 @@ class Varien_Autoload
      *
      * @return bool
      */
-    public function isApcUsed()
+    public static function isApcUsed()
     {
         return self::$useAPC;
     }
@@ -196,7 +196,7 @@ class Varien_Autoload
      *
      * @return string
      */
-    public function getCacheKey()
+    public static function getCacheKey()
     {
         return self::$cacheKey;
     }
