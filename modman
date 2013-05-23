@@ -1,1 +1,4 @@
 app/code/local/Varien/Autoload.php  app/code/local/Varien/Autoload.php
+app/etc/modules/*					app/etc/modules/
+app/code/local/Aoe/ClassPathCache/	app/code/local/Aoe/ClassPathCache/
+shell/*                             shell/
