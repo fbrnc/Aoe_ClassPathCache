@@ -135,7 +135,7 @@ class Varien_Autoload
      * @return array
      */
     static public function loadCacheContent() {
-        if (self::$useAPC) {
+        if (self::isApcUsed()) {
             $value = apc_fetch(self::$cacheKey);
             if ($value !== FALSE) {
                 self::setCache($value);
@@ -182,12 +182,22 @@ class Varien_Autoload
     }
 
     /**
+     * Check if apc is used
+     *
+     * @return bool
+     */
+    public function isApcUsed()
+    {
+        return self::$useAPC;
+    }
+
+    /**
      * Class destructor
      */
     public function __destruct()
     {
         if (self::$_numberOfFilesAddedToCache > 0) {
-            if (self::$useAPC) {
+            if (self::isApcUsed()) {
                 apc_store(self::$cacheKey, self::$_cache, 0);
             } else {
                 $fileContent = serialize(self::$_cache);
