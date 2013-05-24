@@ -202,6 +202,16 @@ class Varien_Autoload
     }
 
     /**
+     * Get cache
+     *
+     * @return array
+     */
+    public static function getCache()
+    {
+        return self::$_cache;
+    }
+
+    /**
      * Class destructor
      */
     public function __destruct()

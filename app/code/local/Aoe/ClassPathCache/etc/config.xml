@@ -27,4 +27,15 @@
 		</routers>
 	</frontend>
 
+	<adminhtml>
+		<layout>
+			<updates>
+				<aoe_classpathcache>
+					<file>aoe_classpathcache/aoe_classpathcache.xml</file>
+				</aoe_classpathcache>
+			</updates>
+		</layout>
+	</adminhtml>
+	
+	
 </config>
