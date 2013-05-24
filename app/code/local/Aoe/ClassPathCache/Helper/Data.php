@@ -54,8 +54,8 @@ class Aoe_ClassPathCache_Helper_Data extends Mage_Core_Helper_Abstract {
      */
     public function checkUrl()
     {
-        $k = Mage::app()->getRequest()->getParam('k');
-        $v = Mage::app()->getRequest()->getParam('v');
+        $k = base64_decode(Mage::app()->getRequest()->getParam('k'));
+        $v = base64_decode(Mage::app()->getRequest()->getParam('v'));
         $ek = Mage::helper('core')->decrypt($v);
         return $k && $v && ($ek == $k);
     }
@@ -69,8 +69,8 @@ class Aoe_ClassPathCache_Helper_Data extends Mage_Core_Helper_Abstract {
     {
         $k = Mage::helper('core')->getRandomString(16);
         return Mage::getUrl('aoeclasspathcache/index/clear', array(
-            'k' => $k,
-            'v' => Mage::helper('core')->encrypt($k),
+            'k' => base64_encode($k),
+            'v' => base64_encode(Mage::helper('core')->encrypt($k)),
             '_store' => 'default' // TODO: that's not nice
         ));
     }
