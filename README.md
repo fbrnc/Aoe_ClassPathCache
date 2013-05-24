@@ -2,8 +2,11 @@
 
 ## Change log
 
+* v0.2.1
+    * Adding button to cache management page to flush Aoe_ClassPathCache content
+
 * v0.2.0
-    *  Adding controller that allows clearing apc cache in a frontend context and helper function that abstracts from that/
+    * Adding controller that allows clearing apc cache in a frontend context and helper function that abstracts from that/
 
 * v0.1.0
     * Adding APC support
