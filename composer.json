@@ -3,11 +3,15 @@
     "type":"magento-module",
     "license":"OSL-3.0",
     "homepage":"https://github.com/fbrnc/Aoe_ClassPathCache",
-    "description":"Class path cache for Magento autoloader.",
+    "description":"Class path and template filename cache for Magento autoloader.",
     "authors":[
         {
             "name":"Fabrizio Branca",
             "email":"mail@{firstname}-{lastname}.de"
+        },
+        {
+            "name":"Bastian Ike",
+            "email":"bastian.ike@gmail.com"
         }
     ],
     "require":{

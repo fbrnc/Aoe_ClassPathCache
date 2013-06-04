@@ -1,1 +1,2 @@
 app/code/local/Varien/Autoload.php  app/code/local/Varien/Autoload.php
+app/code/local/Mage/Core/Model/Design/Package.php app/code/local/Mage/Core/Model/Design/Package.php
