@@ -31,6 +31,7 @@ class Mage_Core_Model_Design_Package
     const DEFAULT_PACKAGE = 'default';
     const DEFAULT_THEME   = 'default';
     const BASE_PACKAGE    = 'base';
+    const CACHE_PREFIX    = 'TEMPLATEFILE_';
 
     /**
      * @deprecated after 1.4.0.0-alpha3
@@ -418,7 +419,7 @@ class Mage_Core_Model_Design_Package
     {
         Varien_Profiler::start(__METHOD__);
         $this->updateParamDefaults($params);
-        $cacheKey = $this->_renderFilename($file, $params);
+        $cacheKey = self::CACHE_PREFIX . $this->_renderFilename($file, $params);
         $result = Mage::app()->loadCache($cacheKey);
         if (!$result) {
             $result = $this->_fallback($file, $params, array(
@@ -480,7 +481,7 @@ class Mage_Core_Model_Design_Package
             $params['_default'] = false;
         }
         $this->updateParamDefaults($params);
-        $cacheKey = $this->_renderFilename($file, $params);
+        $cacheKey = self::CACHE_PREFIX . $this->_renderFilename($file, $params);
         $result = Mage::app()->loadCache($cacheKey);
         if (!$result) {
             if (!empty($file)) {
