@@ -7,6 +7,7 @@
  */
 class Varien_Autoload
 {
+    const SCOPE_FILE_PREFIX = '__';
     const CACHE_KEY_PREFIX = 'classPathCache';
 
     static protected $_instance;
