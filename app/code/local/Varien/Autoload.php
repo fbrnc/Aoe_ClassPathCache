@@ -25,9 +25,7 @@ class Varien_Autoload
         if (!defined('BP')) {
             define('BP', dirname(dirname(dirname(dirname(dirname(__FILE__))))));
         }
-        if (extension_loaded('apc')) {
-            self::$useAPC = TRUE;
-        }
+        $this->_useAPC  = (boolean)ini_get('apc.enabled');
         self::$cacheKey = self::CACHE_KEY_PREFIX . "_" . md5(BP);
         self::registerScope(self::$_scope);
         self::loadCacheContent();
