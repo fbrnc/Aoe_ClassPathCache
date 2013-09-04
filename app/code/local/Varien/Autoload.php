@@ -173,7 +173,15 @@ class Varien_Autoload
      */
     static public function searchFullPath($filename)
     {
-        return stream_resolve_include_path($filename);
+        // return stream_resolve_include_path($filename);
+        $paths = explode(PATH_SEPARATOR, get_include_path());
+        foreach ($paths as $path) {
+            $fullPath = $path . DIRECTORY_SEPARATOR . $filename;
+            if (file_exists($fullPath)) {
+                return $fullPath;
+            }
+        }
+        return false;
     }
 
     /**
