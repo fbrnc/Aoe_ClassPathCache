@@ -22,6 +22,19 @@ class Aoe_ClassPathCache_Shell extends Mage_Shell_Abstract {
         }
     }
 
+    /**
+     * Set revalidate flag
+     */
+    public function setRevalidateFlagAction() {
+        $flagFile = Varien_Autoload::getRevalidateFlagPath();
+        if (file_put_contents($flagFile, DATE_ISO8601)) {
+            echo "Success\n";
+        } else {
+            echo "Error while writing '$flagFile'\n";
+            exit(1);
+        }
+    }
+
 
 	/** ****************************************************************************************************************
 	 * SHELL DISPATCHER

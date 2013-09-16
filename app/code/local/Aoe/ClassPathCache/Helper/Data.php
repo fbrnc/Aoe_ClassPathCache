@@ -32,11 +32,14 @@ class Aoe_ClassPathCache_Helper_Data extends Mage_Core_Helper_Abstract {
      */
     public function revalidateCache()
     {
+        $start = microtime(true);
         $cache = Varien_Autoload::getCache();
         Varien_Autoload::setCache(array());
         foreach ($cache as $className => $path) {
             Varien_Autoload::getFullPath($className);
         }
+        $duration = microtime(true) - $start;
+        Mage::log('[ClassPathCache] Revalidated '.count($cache).' classes (duration: ' . round($duration, 2) . ' sec)');
     }
 
     /**

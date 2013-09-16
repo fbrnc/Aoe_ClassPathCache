@@ -124,6 +124,15 @@ class Varien_Autoload
     }
 
     /**
+     * Get revalidate flag file path
+     *
+     * @return string
+     */
+    static public function getRevalidateFlagPath() {
+        return self::$_BP . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'cache'. DIRECTORY_SEPARATOR . 'classPathCache.flag';
+    }
+
+    /**
      * Setting cache content
      *
      * @param array $cache
@@ -138,16 +147,21 @@ class Varien_Autoload
      * @return array
      */
     static public function loadCacheContent() {
+
         if (self::isApcUsed()) {
             $value = apc_fetch(self::getCacheKey());
             if ($value !== FALSE) {
                 self::setCache($value);
             }
-            return;
-        }
-        if (file_exists(self::getCacheFilePath())) {
+        } elseif (file_exists(self::getCacheFilePath())) {
             self::setCache(unserialize(file_get_contents(self::getCacheFilePath())));
         }
+
+        if (file_exists(self::getRevalidateFlagPath()) && unlink(self::getRevalidateFlagPath())) {
+            $helper = new Aoe_ClassPathCache_Helper_Data;
+            $helper->revalidateCache();
+        }
+
     }
 
     /**
