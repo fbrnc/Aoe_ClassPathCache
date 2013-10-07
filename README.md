@@ -8,6 +8,7 @@
     * Do not store apc cache for cli mode.
     * Make useAPC static property public to allow it to be explicitly enabled or disabled.
     * Remove tmp files on failed rename.
+    * Prevent fatal errors when autoloader invoked during shutdown.
 
 * v0.2.1
     * Adding button to cache management page to flush Aoe_ClassPathCache content
