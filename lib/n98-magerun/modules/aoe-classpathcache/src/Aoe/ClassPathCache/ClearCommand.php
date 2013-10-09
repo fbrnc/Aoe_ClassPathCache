@@ -28,7 +28,7 @@ class ClearCommand extends AbstractMagentoCommand
             if (\Mage::helper('aoe_classpathcache')->clearClassPathCache()) {
                 $output->writeln('<info>Success</info>');
             } else {
-                throw new \Exception('Error while cleaning class path cache. Check system.log for details');;
+                throw new \Exception('Error while cleaning class path cache. Check system.log for details');
             }
         }
     }
