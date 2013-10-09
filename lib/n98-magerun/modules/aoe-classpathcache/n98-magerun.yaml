@@ -1,0 +1,6 @@
+autoloaders:
+  Aoe\ClassPathCache: %module%/src
+
+commands:
+  customCommands:
+    - Aoe\ClassPathCache\ClearCommand

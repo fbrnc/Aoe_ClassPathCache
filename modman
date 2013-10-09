@@ -1,1 +1,2 @@
 app/code/local/Varien/Autoload.php  app/code/local/Varien/Autoload.php
+lib/n98-magerun/modules/aoe-classpathcache  lib/n98-magerun/modules/aoe-classpathcache
