@@ -8,6 +8,8 @@
  */
 class Aoe_ClassPathCache_Helper_Data extends Mage_Core_Helper_Abstract {
 
+    const LOG_FILE = 'classpathcache.log';
+
     /**
      * Clear the class path cache
      *
@@ -16,10 +18,10 @@ class Aoe_ClassPathCache_Helper_Data extends Mage_Core_Helper_Abstract {
     public function clearClassPathCache() {
         if (Varien_Autoload::isApcUsed() && php_sapi_name() == 'cli') {
             // do frontend call
-            Mage::log('[ClassPathCache] Doing frontend call.');
+            Mage::log('[ClassPathCache] Doing frontend call.', Zend_Log::INFO, self::LOG_FILE);
             $response = file_get_contents($this->getUrl());
             if ($response != 'OK') {
-                Mage::log('[ClassPathCache] Frontend call failed. Response: ' . $response);
+                Mage::log('[ClassPathCache] Frontend call failed. Response: ' . $response, Zend_Log::INFO, self::LOG_FILE);
                 return FALSE;
             }
         }
@@ -39,7 +41,7 @@ class Aoe_ClassPathCache_Helper_Data extends Mage_Core_Helper_Abstract {
             Varien_Autoload::getFullPath($className);
         }
         $duration = microtime(true) - $start;
-        Mage::log('[ClassPathCache] Revalidated '.count($cache).' classes (duration: ' . round($duration, 2) . ' sec)');
+        Mage::log('[ClassPathCache] Revalidated '.count($cache).' classes (duration: ' . round($duration, 2) . ' sec)', Zend_Log::INFO, self::LOG_FILE);
     }
 
     /**

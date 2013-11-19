@@ -75,6 +75,13 @@ class Varien_Autoload
      */
     public function autoload($class)
     {
+        // Prevent fatal errors when PHP has already started shutting down
+        if ( ! isset(self::$_cache)) {
+            $classFile = str_replace(' ', DIRECTORY_SEPARATOR, ucwords(str_replace('_', ' ', $class)));
+            return include $classFile.'.php';
+        }
+
+        // Get file path (from cache if available)
         $realPath = self::getFullPath($class);
         if ($realPath !== false) {
             return include self::$_BP . DIRECTORY_SEPARATOR . $realPath;
@@ -245,6 +252,8 @@ class Varien_Autoload
                 if (file_put_contents($tmpFile, $fileContent)) {
                     if (rename($tmpFile, self::getCacheFilePath())) {
                         @chmod(self::getCacheFilePath(), 0664);
+                    } else {
+                        @unlink($tmpFile);
                     }
                 }
             }
