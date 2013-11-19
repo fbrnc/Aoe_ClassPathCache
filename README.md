@@ -2,6 +2,14 @@
 
 ## Change log
 
+* v0.3.0 (Merging community contributions. Thanks a lot!)
+    * Added support for dynamic n98-magerun module (by Christian Muench)
+    * Fix package name in composer.json (by Kalen Jordan)
+    * Log into separate file (var/log/classpathcache.log) (by Colin Mollenhour)
+    * Prevent fatal errors when PHP has already started shutting down. (by Colin Mollenhour)
+    * Remove tmp file on failed rename (prevent filling disk with tmp files (by Colin Mollenhour)
+    * Added license information (GPL v3)
+
 * v0.2.2
     * Revalidate cache rather than clearing cache to prevent stampeding.
     * Check that APC is actually enabled.
