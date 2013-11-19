@@ -41,7 +41,7 @@ class Aoe_ClassPathCache_Helper_Data extends Mage_Core_Helper_Abstract {
             Varien_Autoload::getFullPath($className);
         }
         $duration = microtime(true) - $start;
-        Mage::log('[ClassPathCache] Revalidated '.count($cache).' classes (duration: ' . round($duration, 2) . ' sec)', Zend_Log::INFO, self::LOG_FILE);
+        Mage::log('[ClassPathCache] Revalidated '.count($cache).' classes (duration: ' . round($duration, 2) . ' sec)', 6 /* Zend_Log::INFO */, self::LOG_FILE);
     }
 
     /**
