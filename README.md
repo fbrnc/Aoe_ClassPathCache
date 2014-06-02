@@ -2,6 +2,9 @@
 
 ## Change log
 
+* v0.4.0
+    * Added support for PSR-0 compliant autoloading
+
 * v0.3.0 (Merging community contributions. Thanks a lot!)
     * Added support for dynamic n98-magerun module (by Christian Muench)
     * Fix package name in composer.json (by Kalen Jordan)
