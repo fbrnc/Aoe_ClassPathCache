@@ -2,6 +2,9 @@
 
 ## Change log
 
+* v0.4.1
+    * Fixed bug in the autoload desctructor call that was throwing exceptions in developer mode
+
 * v0.4.0
     * Added support for PSR-0 compliant autoloading
 
