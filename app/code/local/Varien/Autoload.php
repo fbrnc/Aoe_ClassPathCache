@@ -262,11 +262,11 @@ class Varien_Autoload
                 if (PHP_SAPI != 'cli') {
                     apc_store(self::getCacheKey(), self::$_cache, 0);
                 }
-            } else {
+            } elseif(is_dir_writeable(dirname(self::getCacheFilePath()))) {
                 $fileContent = serialize(self::$_cache);
                 $tmpFile = tempnam(sys_get_temp_dir(), 'aoe_classpathcache');
                 if (file_put_contents($tmpFile, $fileContent)) {
-                    if (rename($tmpFile, self::getCacheFilePath())) {
+                    if (@rename($tmpFile, self::getCacheFilePath())) {
                         @chmod(self::getCacheFilePath(), 0664);
                     } else {
                         @unlink($tmpFile);
