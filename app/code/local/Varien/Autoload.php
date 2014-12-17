@@ -172,7 +172,12 @@ class Varien_Autoload
                 self::setCache($value);
             }
         } elseif (file_exists(self::getCacheFilePath())) {
-            self::setCache(unserialize(file_get_contents(self::getCacheFilePath())));
+            $cacheFilePath = unserialize(file_get_contents(self::getCacheFilePath()));
+			// If the file is corrupted, it resets cache
+		    if($cacheFilePath === false) {
+		        $cacheFilePath = array();
+		    }
+		    self::setCache($cacheFilePath);
         }
 
         if (file_exists(self::getRevalidateFlagPath()) && unlink(self::getRevalidateFlagPath())) {
