@@ -1,7 +1,7 @@
-app/code/local/Varien/Autoload.php  app/code/local/Varien/Autoload.php
-app/etc/modules/*					app/etc/modules/
-app/code/local/Aoe/ClassPathCache/	app/code/local/Aoe/ClassPathCache/
-shell/*                             shell/
-app/design/adminhtml/default/default/layout/aoe_classpathcache/		app/design/adminhtml/default/default/layout/aoe_classpathcache/
-app/design/adminhtml/default/default/template/aoe_classpathcache/	app/design/adminhtml/default/default/template/aoe_classpathcache/
-lib/n98-magerun/modules/aoe-classpathcache  lib/n98-magerun/modules/aoe-classpathcache
+app/code/local/Varien/Autoload.php                                                         app/code/local/Varien/Autoload.php
+app/etc/modules/Aoe_ClassPathCache.xml                                                     app/etc/modules/Aoe_ClassPathCache.xml
+app/code/local/Aoe/ClassPathCache                                                          app/code/local/Aoe/ClassPathCache
+shell/aoe_classpathcache.php                                                               shell/aoe_classpathcache.php
+app/design/adminhtml/default/default/layout/aoe_classpathcache/aoe_classpathcache.xml      app/design/adminhtml/default/default/layout/aoe_classpathcache/aoe_classpathcache.xml
+app/design/adminhtml/default/default/template/aoe_classpathcache/aoe_classpathcache.phtml  app/design/adminhtml/default/default/template/aoe_classpathcache/aoe_classpathcache.phtml
+lib/n98-magerun/modules/aoe-classpathcache                                                 lib/n98-magerun/modules/aoe-classpathcache
