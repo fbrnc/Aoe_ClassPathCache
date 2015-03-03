@@ -1,6 +1,6 @@
 app/code/local/Varien/Autoload.php                                                         app/code/local/Varien/Autoload.php
 app/etc/modules/Aoe_ClassPathCache.xml                                                     app/etc/modules/Aoe_ClassPathCache.xml
-app/code/local/Aoe/ClassPathCache                                                          app/code/local/Aoe/ClassPathCache
+app/code/community/Aoe/ClassPathCache                                                      app/code/community/Aoe/ClassPathCache
 shell/aoe_classpathcache.php                                                               shell/aoe_classpathcache.php
 app/design/adminhtml/default/default/layout/aoe_classpathcache/aoe_classpathcache.xml      app/design/adminhtml/default/default/layout/aoe_classpathcache/aoe_classpathcache.xml
 app/design/adminhtml/default/default/template/aoe_classpathcache/aoe_classpathcache.phtml  app/design/adminhtml/default/default/template/aoe_classpathcache/aoe_classpathcache.phtml
