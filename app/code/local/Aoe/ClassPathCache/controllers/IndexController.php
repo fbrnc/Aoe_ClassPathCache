@@ -1,13 +1,13 @@
 <?php
+
 /**
  * Class path cache controller
  *
  * @author Fabrizio Branca
- * @since 2013-05-23
+ * @since  2013-05-23
  */
 class Aoe_ClassPathCache_IndexController extends Mage_Core_Controller_Front_Action
 {
-
     /**
      * Clear classpathcache
      *
@@ -25,5 +25,4 @@ class Aoe_ClassPathCache_IndexController extends Mage_Core_Controller_Front_Acti
             $this->getResponse()->setBody('WRONG KEY');
         }
     }
-
 }
