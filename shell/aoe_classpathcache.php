@@ -87,10 +87,7 @@ class Aoe_ClassPathCache_Shell extends Mage_Shell_Abstract
         }
         return $help;
     }
-
-
 }
 
 $shell = new Aoe_ClassPathCache_Shell();
 $shell->run();
-
