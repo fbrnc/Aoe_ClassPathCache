@@ -2,11 +2,12 @@
 
 /**
  * Helper
- * 
+ *
  * @author Fabrizio Branca
- * @since 2013-05-23
+ * @since  2013-05-23
  */
-class Aoe_ClassPathCache_Helper_Data extends Mage_Core_Helper_Abstract {
+class Aoe_ClassPathCache_Helper_Data extends Mage_Core_Helper_Abstract
+{
 
     const LOG_FILE = 'classpathcache.log';
 
@@ -15,18 +16,19 @@ class Aoe_ClassPathCache_Helper_Data extends Mage_Core_Helper_Abstract {
      *
      * @return bool
      */
-    public function clearClassPathCache() {
+    public function clearClassPathCache()
+    {
         if (Varien_Autoload::isApcUsed() && php_sapi_name() == 'cli') {
             // do frontend call
             Mage::log('[ClassPathCache] Doing frontend call.', Zend_Log::INFO, self::LOG_FILE);
             $response = file_get_contents($this->getUrl());
             if ($response != 'OK') {
                 Mage::log('[ClassPathCache] Frontend call failed. Response: ' . $response, Zend_Log::INFO, self::LOG_FILE);
-                return FALSE;
+                return false;
             }
         }
         $this->revalidateCache();
-        return TRUE;
+        return true;
     }
 
     /**
@@ -41,7 +43,7 @@ class Aoe_ClassPathCache_Helper_Data extends Mage_Core_Helper_Abstract {
             Varien_Autoload::getFullPath($className);
         }
         $duration = microtime(true) - $start;
-        Mage::log('[ClassPathCache] Revalidated '.count($cache).' classes (duration: ' . round($duration, 2) . ' sec)', 6 /* Zend_Log::INFO */, self::LOG_FILE);
+        Mage::log('[ClassPathCache] Revalidated ' . count($cache) . ' classes (duration: ' . round($duration, 2) . ' sec)', 6 /* Zend_Log::INFO */, self::LOG_FILE);
     }
 
     /**
@@ -65,11 +67,14 @@ class Aoe_ClassPathCache_Helper_Data extends Mage_Core_Helper_Abstract {
     public function getUrl()
     {
         $k = Mage::helper('core')->getRandomString(16);
-        return Mage::getUrl('aoeclasspathcache/index/clear', array(
-            'k' => base64_encode($k),
-            'v' => base64_encode(Mage::helper('core')->encrypt($k)),
-            '_store' => Mage::app()->getDefaultStoreView()->getCode()
-        ));
+        return Mage::getUrl(
+            'aoeclasspathcache/index/clear',
+            array(
+                'k'      => base64_encode($k),
+                'v'      => base64_encode(Mage::helper('core')->encrypt($k)),
+                '_store' => Mage::app()->getDefaultStoreView()->getCode()
+            )
+        );
     }
 
 

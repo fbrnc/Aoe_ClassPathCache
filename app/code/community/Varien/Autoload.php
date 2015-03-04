@@ -15,7 +15,7 @@ class Varien_Autoload
     static protected $_cache = array();
     static protected $_numberOfFilesAddedToCache = 0;
 
-    static public $useAPC = NULL;
+    static public $useAPC = null;
     static protected $cacheKey = self::CACHE_KEY_PREFIX;
 
     /* Base Path */
@@ -28,16 +28,15 @@ class Varien_Autoload
     {
         if (defined('BP')) {
             self::$_BP = BP;
-        }
-        elseif (strpos($_SERVER["SCRIPT_FILENAME"], 'get.php') !== false) {
+        } elseif (strpos($_SERVER["SCRIPT_FILENAME"], 'get.php') !== false) {
             global $bp; //get from get.php
-            if (isset($bp) && !empty($bp)){
+            if (isset($bp) && !empty($bp)) {
                 self::$_BP = $bp;
             }
         }
 
         // Allow APC to be disabled externally by explicitly setting Varien_Autoload::$useAPC = FALSE;
-        if (self::$useAPC === NULL) {
+        if (self::$useAPC === null) {
             self::$useAPC = extension_loaded('apc') && ini_get('apc.enabled');
         }
 
@@ -71,14 +70,15 @@ class Varien_Autoload
      * Load class source code
      *
      * @param string $class
+     *
      * @return bool
      */
     public function autoload($class)
     {
         // Prevent fatal errors when PHP has already started shutting down
-        if ( ! isset(self::$_cache)) {
+        if (!isset(self::$_cache)) {
             $classFile = str_replace(' ', DIRECTORY_SEPARATOR, ucwords(str_replace('_', ' ', $class)));
-            return include $classFile.'.php';
+            return include $classFile . '.php';
         }
 
         // Get file path (from cache if available)
@@ -93,16 +93,18 @@ class Varien_Autoload
      * Get file name from class name
      *
      * @param string $className
+     *
      * @return string
      */
-    static function getFileFromClassName($className) {
+    static function getFileFromClassName($className)
+    {
         $className = ltrim($className, '\\');
-        $fileName  = '';
+        $fileName = '';
         $namespace = '';
         if ($lastNsPos = strrpos($className, '\\')) {
             $namespace = substr($className, 0, $lastNsPos);
             $className = substr($className, $lastNsPos + 1);
-            $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+            $fileName = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
         }
 
         $fileName .= str_replace(' ', DIRECTORY_SEPARATOR, ucwords(str_replace('_', ' ', $className))) . '.php';
@@ -137,8 +139,9 @@ class Varien_Autoload
      *
      * @return string
      */
-    static public function getCacheFilePath() {
-        return self::$_BP . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'cache'. DIRECTORY_SEPARATOR . 'classPathCache.php';
+    static public function getCacheFilePath()
+    {
+        return self::$_BP . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'classPathCache.php';
     }
 
     /**
@@ -146,8 +149,9 @@ class Varien_Autoload
      *
      * @return string
      */
-    static public function getRevalidateFlagPath() {
-        return self::$_BP . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'cache'. DIRECTORY_SEPARATOR . 'classPathCache.flag';
+    static public function getRevalidateFlagPath()
+    {
+        return self::$_BP . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'classPathCache.flag';
     }
 
     /**
@@ -155,7 +159,8 @@ class Varien_Autoload
      *
      * @param array $cache
      */
-    static public function setCache(array $cache) {
+    static public function setCache(array $cache)
+    {
         self::$_cache = $cache;
     }
 
@@ -164,20 +169,21 @@ class Varien_Autoload
      *
      * @return array
      */
-    static public function loadCacheContent() {
+    static public function loadCacheContent()
+    {
 
         if (self::isApcUsed()) {
             $value = apc_fetch(self::getCacheKey());
-            if ($value !== FALSE) {
+            if ($value !== false) {
                 self::setCache($value);
             }
         } elseif (file_exists(self::getCacheFilePath())) {
             $cacheFilePath = unserialize(file_get_contents(self::getCacheFilePath()));
-			// If the file is corrupted, it resets cache
-		    if($cacheFilePath === false) {
-		        $cacheFilePath = array();
-		    }
-		    self::setCache($cacheFilePath);
+            // If the file is corrupted, it resets cache
+            if ($cacheFilePath === false) {
+                $cacheFilePath = array();
+            }
+            self::setCache($cacheFilePath);
         }
 
         if (file_exists(self::getRevalidateFlagPath()) && unlink(self::getRevalidateFlagPath())) {
@@ -194,9 +200,11 @@ class Varien_Autoload
      * Get full path
      *
      * @param $className
+     *
      * @return mixed
      */
-    static public function getFullPath($className) {
+    static public function getFullPath($className)
+    {
         if (!isset(self::$_cache[$className])) {
             self::$_cache[$className] = self::searchFullPath(self::getFileFromClassName($className));
             // removing the basepath
@@ -212,6 +220,7 @@ class Varien_Autoload
      * Checks if a file exists in the include path and returns the full path if the file exists
      *
      * @param $filename
+     *
      * @return bool|string
      */
     static public function searchFullPath($filename)
@@ -267,7 +276,7 @@ class Varien_Autoload
                 if (PHP_SAPI != 'cli') {
                     apc_store(self::getCacheKey(), self::$_cache, 0);
                 }
-            } elseif(is_dir_writeable(dirname(self::getCacheFilePath()))) {
+            } elseif (is_dir_writeable(dirname(self::getCacheFilePath()))) {
                 $fileContent = serialize(self::$_cache);
                 $tmpFile = tempnam(sys_get_temp_dir(), 'aoe_classpathcache');
                 if (file_put_contents($tmpFile, $fileContent)) {

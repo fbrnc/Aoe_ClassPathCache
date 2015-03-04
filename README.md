@@ -2,8 +2,17 @@
 
 ## Change log
 
+* v0.5.0
+    * Changed code pool from 'local' to 'community'.
+      NB: This change could possibly break things if you are manually installing the code instead of using modman/composer
+    * Reformatted code to PSR-1/PSR-2
+    * Reformatted additional files to use spaces instead of tabs and \n for line-breaks
+
+* v0.4.2
+    * Fixed bug when calling Varien_Autoload::setCache() with a bad cache file (Nicolas Fabre)
+
 * v0.4.1
-    * Fixed bug in the autoload desctructor call that was throwing exceptions in developer mode
+    * Fixed bug in the autoload destructor call that was throwing exceptions in developer mode
 
 * v0.4.0
     * Added support for PSR-0 compliant autoloading
