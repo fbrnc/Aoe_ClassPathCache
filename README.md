@@ -1,4 +1,4 @@
-# AOE ClassPathCache
+# AOE ClassPathCache [![Build Status](https://travis-ci.org/AOEpeople/Aoe_ClassPathCache.svg?branch=master)](https://travis-ci.org/AOEpeople/Aoe_ClassPathCache)
 
 ## Change log
 
