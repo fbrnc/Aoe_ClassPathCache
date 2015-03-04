@@ -1,4 +1,4 @@
-# AOE ClassPathCache [![Build Status](https://travis-ci.org/AOEpeople/Aoe_ClassPathCache.svg?branch=master)](https://travis-ci.org/AOEpeople/Aoe_ClassPathCache)
+# AOE ClassPathCache
 
 ## Change log
 
@@ -58,3 +58,10 @@
 
     cd shell/
     php aoe_classpathcache.php -action clear
+
+## Additional Info
+[![Build Status](https://travis-ci.org/AOEpeople/Aoe_ClassPathCache.svg?branch=master)](https://travis-ci.org/AOEpeople/Aoe_ClassPathCache)
+[![Latest Stable Version](https://poser.pugx.org/aoepeople/aoe_classpathcache/v/stable.svg)](https://packagist.org/packages/aoepeople/aoe_classpathcache)
+[![Total Downloads](https://poser.pugx.org/aoepeople/aoe_classpathcache/downloads.svg)](https://packagist.org/packages/aoepeople/aoe_classpathcache)
+[![Latest Unstable Version](https://poser.pugx.org/aoepeople/aoe_classpathcache/v/unstable.svg)](https://packagist.org/packages/aoepeople/aoe_classpathcache)
+[![License](https://poser.pugx.org/aoepeople/aoe_classpathcache/license.svg)](https://packagist.org/packages/aoepeople/aoe_classpathcache)
