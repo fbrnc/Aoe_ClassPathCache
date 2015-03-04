@@ -10,16 +10,16 @@ class Varien_Autoload
     const SCOPE_FILE_PREFIX = '__';
     const CACHE_KEY_PREFIX = 'classPathCache';
 
-    static protected $_instance;
-    static protected $_scope = 'default';
-    static protected $_cache = array();
-    static protected $_numberOfFilesAddedToCache = 0;
+    protected static $_instance;
+    protected static $_scope = 'default';
+    protected static $_cache = array();
+    protected static $_numberOfFilesAddedToCache = 0;
 
-    static public $useAPC = null;
-    static protected $cacheKey = self::CACHE_KEY_PREFIX;
+    public static $useAPC = null;
+    protected static $cacheKey = self::CACHE_KEY_PREFIX;
 
     /* Base Path */
-    static protected $_BP = '';
+    protected static $_BP = '';
 
     /**
      * Class constructor
@@ -50,7 +50,7 @@ class Varien_Autoload
      *
      * @return Varien_Autoload
      */
-    static public function instance()
+    public static function instance()
     {
         if (!self::$_instance) {
             self::$_instance = new Varien_Autoload();
@@ -61,7 +61,7 @@ class Varien_Autoload
     /**
      * Register SPL autoload function
      */
-    static public function register()
+    public static function register()
     {
         spl_autoload_register(array(self::instance(), 'autoload'));
     }
@@ -96,7 +96,7 @@ class Varien_Autoload
      *
      * @return string
      */
-    static function getFileFromClassName($className)
+    public static function getFileFromClassName($className)
     {
         $className = ltrim($className, '\\');
         $fileName = '';
@@ -119,7 +119,7 @@ class Varien_Autoload
      *
      * @param string $code scope code
      */
-    static public function registerScope($code)
+    public static function registerScope($code)
     {
         self::$_scope = $code;
     }
@@ -129,7 +129,7 @@ class Varien_Autoload
      *
      * @return string
      */
-    static public function getScope()
+    public static function getScope()
     {
         return self::$_scope;
     }
@@ -139,7 +139,7 @@ class Varien_Autoload
      *
      * @return string
      */
-    static public function getCacheFilePath()
+    public static function getCacheFilePath()
     {
         return self::$_BP . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'classPathCache.php';
     }
@@ -149,7 +149,7 @@ class Varien_Autoload
      *
      * @return string
      */
-    static public function getRevalidateFlagPath()
+    public static function getRevalidateFlagPath()
     {
         return self::$_BP . DIRECTORY_SEPARATOR . 'var' . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'classPathCache.flag';
     }
@@ -159,7 +159,7 @@ class Varien_Autoload
      *
      * @param array $cache
      */
-    static public function setCache(array $cache)
+    public static function setCache(array $cache)
     {
         self::$_cache = $cache;
     }
@@ -169,7 +169,7 @@ class Varien_Autoload
      *
      * @return array
      */
-    static public function loadCacheContent()
+    public static function loadCacheContent()
     {
 
         if (self::isApcUsed()) {
@@ -203,7 +203,7 @@ class Varien_Autoload
      *
      * @return mixed
      */
-    static public function getFullPath($className)
+    public static function getFullPath($className)
     {
         if (!isset(self::$_cache[$className])) {
             self::$_cache[$className] = self::searchFullPath(self::getFileFromClassName($className));
@@ -223,7 +223,7 @@ class Varien_Autoload
      *
      * @return bool|string
      */
-    static public function searchFullPath($filename)
+    public static function searchFullPath($filename)
     {
         // return stream_resolve_include_path($filename);
         $paths = explode(PATH_SEPARATOR, get_include_path());
@@ -289,5 +289,4 @@ class Varien_Autoload
             }
         }
     }
-
 }
