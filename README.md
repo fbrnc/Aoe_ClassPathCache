@@ -2,6 +2,12 @@
 
 ## Change log
 
+* v0.5.1
+    * Added Travis CI config file
+    * Add PHPCS ruleset and check
+    * Fixed several PSR-2 related errors in the code
+    * Added tracking of the Travis CI build status for master into the README
+
 * v0.5.0
     * Changed code pool from 'local' to 'community'.
       NB: This change could possibly break things if you are manually installing the code instead of using modman/composer
