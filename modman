@@ -1,4 +1,4 @@
-app/code/local/Varien/Autoload.php                                app/code/local/Varien/Autoload.php
+app/code/community/Varien/Autoload.php                            app/code/local/Varien/Autoload.php
 app/etc/modules/Aoe_ClassPathCache.xml                            app/etc/modules/Aoe_ClassPathCache.xml
 app/code/community/Aoe/ClassPathCache                             app/code/community/Aoe/ClassPathCache
 shell/aoe_classpathcache.php                                      shell/aoe_classpathcache.php
