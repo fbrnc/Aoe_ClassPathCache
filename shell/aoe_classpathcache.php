@@ -30,7 +30,7 @@ class Aoe_ClassPathCache_Shell extends Mage_Shell_Abstract
     public function setRevalidateFlagAction()
     {
         $flagFile = Varien_Autoload::getRevalidateFlagPath();
-        if (file_put_contents($flagFile, DATE_ISO8601)) {
+        if (file_put_contents($flagFile, date(DATE_ISO8601))) {
             echo "Success\n";
         } else {
             echo "Error while writing '$flagFile'\n";
